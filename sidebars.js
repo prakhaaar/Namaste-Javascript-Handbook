@@ -15,8 +15,8 @@ const sidebars = {
     {
       type: "category",
       label: "Namaste JS Season 2",
-      // Generates lecture-20 to lecture-23
-      items: Array.from({ length: 4 }, (_, index) => `lecture-${index + 20}`),
+      // Generates lecture-20 to lecture-24
+      items: Array.from({ length: 5 }, (_, index) => `lecture-${index + 20}`),
     },
   ],
 };
