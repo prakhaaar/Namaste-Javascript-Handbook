@@ -1,4 +1,4 @@
-# 🎬 Episode 5 - Promise APIs + Interview Questions 🔥
+# 🎬 Episode 5 - Promise APIs + Interview Questions
 
 ---
 
@@ -54,12 +54,13 @@ Explanation:
 */
 ```
 
-Promise.all error: p3 failed
+⚡ **Output:**
 
+```
+Promise.all error: p3 failed
 ```
 
 ---
-```
 
 ### 2️⃣ `Promise.allSettled()`
 
@@ -67,27 +68,35 @@ Promise.all error: p3 failed
 - Waits for **all promises to settle**, regardless of success or failure.
 - Returns an **array of objects** describing the outcome of each promise.
 
-````js
-Promise.allSettled([p1, p2, p3]).then((results) =>
-  console.log("Promise.allSettled results:", results)
-);
+```js
+// -------------------------------
+// 🔹 Promise.allSettled()
+// -------------------------------
+// ✅ Executes all promises in parallel.
+// ✅ Waits for all to settle (fulfilled or rejected).
+// ✅ Always resolves with an array of results.
 
+Promise.allSettled([p1, p2, p3])
+  // This callback receives an array of objects (one per promise)
+  .then((results) => console.log("Promise.allSettled results:", results));
 
-⚡ **Output after 3 seconds:**
-
-```json
+/*
+⚡ Output after 3 seconds:
 [
   { "status": "fulfilled", "value": "p1 success" },
   { "status": "fulfilled", "value": "p2 success" },
   { "status": "rejected", "reason": "p3 failed" }
 ]
-````
+
+Explanation:
+- Waits for all three promises to complete (either resolve or reject).
+- Each result object has:
+  → status: "fulfilled" or "rejected"
+  → value or reason: depending on the outcome.
+*/
+```
 
 ---
-
-```
-
-```
 
 ### 3️⃣ `Promise.race()`
 
@@ -95,15 +104,26 @@ Promise.allSettled([p1, p2, p3]).then((results) =>
 - Ignores the rest of the promises after the first settles.
 
 ```js
+// -------------------------------
+// 🔹 Promise.race()
+// -------------------------------
+// ✅ Whichever promise settles first decides the result.
+// ✅ Can resolve or reject depending on the first completed promise.
+
 Promise.race([p1, p2, p3])
+  // If the first promise to settle resolves, this runs
   .then((res) => console.log("Promise.race result:", res))
+  // If the first promise to settle rejects, this runs
   .catch((err) => console.log("Promise.race error:", err));
-```
 
-⚡ **Output after 1 second:**
-
-```
+/*
+⚡ Output after 1 second:
 Promise.race error: p3 failed
+
+Explanation:
+- p3 rejects first (after 1s), so the race ends immediately with rejection.
+- p1 and p2 are ignored since the race already settled.
+*/
 ```
 
 ---
@@ -111,18 +131,31 @@ Promise.race error: p3 failed
 ### 4️⃣ `Promise.any()`
 
 - Returns the **first fulfilled promise**.
-- Ignores rejected promises unless **all promises are rejected** (then it throws an `AggregateError`).
+- Ignores rejected promises unless **all promises are rejected** (then throws an `AggregateError`).
 
 ```js
+// -------------------------------
+// 🔹 Promise.any()
+// -------------------------------
+// ✅ Resolves with the first fulfilled promise.
+// ✅ Ignores rejected promises.
+// ❌ Rejects only if all promises reject (AggregateError).
+
 Promise.any([p1, p2, p3])
+  // This runs when the first promise successfully resolves
   .then((res) => console.log("Promise.any result:", res))
+  // Runs only if ALL promises reject
   .catch((err) => console.log("Promise.any error:", err));
-```
 
-⚡ **Output after 2 seconds:**
-
-```
+/*
+⚡ Output after 2 seconds:
 Promise.any result: p2 success
+
+Explanation:
+- p3 rejects first (ignored by Promise.any).
+- p2 resolves after 2 seconds → first success, returned immediately.
+- p1 resolves later but is ignored since Promise.any already fulfilled.
+*/
 ```
 
 ---
@@ -141,7 +174,8 @@ Promise.any result: p2 success
 ### 🌐 Pro Tips
 
 - ✅ Use **`Promise.allSettled()`** for API calls where you want all responses, even if some fail.
-- ⚡ Use **`Promise.race()`** or **`Promise.any()`** for **fastest response selection** or **timeouts**.
+- ⚡ Use **`Promise.race()`** or **`Promise.any()`** for **fastest response selection** or **timeout control**.
+- 💡 `Promise.any()` is perfect for **redundant API requests** (e.g., multiple mirrors or endpoints).
 
 ---
 
