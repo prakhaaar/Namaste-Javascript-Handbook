@@ -1,4 +1,4 @@
-# 🎬 Episode 5 - Promise APIs + Interview Questions
+# Episode 5 : Promise APIs + Interview Questions
 
 ---
 
