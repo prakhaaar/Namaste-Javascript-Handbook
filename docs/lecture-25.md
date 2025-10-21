@@ -172,3 +172,9 @@ Instead, they capture (or close over) the this value from the nearest non-arrow 
 - ⚡ **Arrow functions** don’t have their own `this` — they **lexically inherit** it from their parent scope.
 - 🧩 Use **`call()`**, **`apply()`**, or **`bind()`** to manually control the value of `this`.
 - 🔒 Always enable **`"use strict"`** to avoid unintended `this` substitution.
+
+## 📺 Watch Live On YouTube
+
+<a href="https://www.youtube.com/watch?v=9T4z98JcHR0&list=PLxnjbfm5MCHFbRlyVCAqpJFdIzPN_IPID" target="_blank">
+  <img src="https://img.youtube.com/vi/9T4z98JcHR0/maxresdefault.jpg" width="750" alt="Namaste JS Episode 6 Thumbnail" />
+</a>
